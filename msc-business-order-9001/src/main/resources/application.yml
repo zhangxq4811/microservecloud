@@ -1,0 +1,37 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name:  BUSINESS-ORDER
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8671/eureka/,http://127.00..1:8672/eureka/
+    enabled: true
+  instance:
+    prefer-ip-address: true
+
+# 开启熔断
+feign:
+  hystrix:
+    enabled: true
+
+# 配置hystrix超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+# 配置负载均衡
+BUSINESS-USER:
+  ribbon:
+    # WeightedResponseTimeRule 根据服务响应时间权重值策略
+    # RoundRobinRule 轮询策略
+    # RandomRule 随机策略
+    # 默认是轮询，配置为随机
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule

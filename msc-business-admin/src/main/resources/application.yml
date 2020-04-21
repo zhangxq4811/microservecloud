@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name:  BUSINESS-ADMIN
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8671/eureka/,http://127.0.0.1:8672/eureka/
+    enabled: true
+  instance:
+    prefer-ip-address: true
+
+# 构建路由地址
+zuul:
+#  # 定义访问user服务的请求
+#  user:
+#    # 匹配的路由规则
+#    path: /user/**
+#    # 路由的目标服务名
+#    serviceId: BUSINESS-USER
+  # 定义访问order服务的请求
+  order:
+    # 匹配的路由规则
+    path: /order/**
+    # 路由的目标服务名
+    serviceId: BUSINESS-ORDER
